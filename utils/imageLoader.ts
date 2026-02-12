@@ -2,6 +2,10 @@
 // Images are served from the public/images directory.
 
 export const getImageUrl = (filename: string): string => {
-  // Use absolute path referencing the public directory served by Vite
-  return `/public/images/${filename}`;
+  // Use Vite's BASE_URL to correctly resolve assets on GitHub Pages
+  const baseUrl = import.meta.env.BASE_URL.endsWith('/')
+    ? import.meta.env.BASE_URL
+    : `${import.meta.env.BASE_URL}/`;
+
+  return `${baseUrl}images/${filename}`;
 };
