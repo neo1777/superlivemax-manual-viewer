@@ -1,0 +1,5 @@
+{
+  "name": "SuperliveMax Manual Viewer",
+  "description": "A responsive, single-page digital manual viewer for the SuperliveMax App. Features localized Italian content, automatic formatting, and image layouts identical to the original PDF.",
+  "requestFramePermissions": []
+}
