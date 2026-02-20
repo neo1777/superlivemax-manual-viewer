@@ -68,7 +68,7 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
       <div className="max-w-[1000px] mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <h1 className="font-bold text-xl text-blue-600 hidden sm:block whitespace-nowrap">SuperliveMax Manuale</h1>
         <h1 className="font-bold text-xl text-blue-600 sm:hidden">SuperliveMax</h1>
-        
+
         <div ref={wrapperRef} className="relative w-full max-w-md">
           <div className="relative">
             <input
@@ -79,16 +79,16 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => query.length >= 2 && setIsOpen(true)}
             />
-            <svg 
+            <svg
               className="absolute left-3 top-2.5 h-4 w-4 text-gray-400"
-              fill="none" 
-              stroke="currentColor" 
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
             {query && (
-              <button 
+              <button
                 onClick={() => { setQuery(''); setResults([]); }}
                 className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
               >
@@ -106,20 +106,31 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
                   onClick={() => handleScrollTo(res.page)}
                 >
                   <div className="flex justify-between items-baseline mb-1">
-                     <span className="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">Pagina {res.page}</span>
+                    <span className="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-0.5 rounded-full">Pagina {res.page}</span>
                   </div>
                   <div className="text-sm text-gray-700 line-clamp-2 group-hover:text-blue-800">{res.text}</div>
                 </button>
               ))}
             </div>
           )}
-          
+
           {isOpen && query.length >= 2 && results.length === 0 && (
-             <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl p-4 text-center text-gray-500 border border-gray-100 text-sm">
-               Nessun risultato trovato per "{query}"
-             </div>
+            <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-lg shadow-xl p-4 text-center text-gray-500 border border-gray-100 text-sm">
+              Nessun risultato trovato per "{query}"
+            </div>
           )}
         </div>
+
+        <button
+          onClick={() => window.print()}
+          className="flex items-center gap-2 bg-blue-50 hover:bg-blue-100 text-blue-600 border border-blue-200 px-3 py-2 rounded-lg font-medium transition-colors text-sm whitespace-nowrap ml-2"
+          title="Esporta il manuale in formato PDF"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span className="hidden sm:inline">PDF</span>
+        </button>
       </div>
     </header>
   );
