@@ -3,9 +3,11 @@ import { ManualPage } from '../types';
 
 interface HeaderProps {
   content: ManualPage[];
+  onPrint?: () => void;
+  isPrinting?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ content }) => {
+const Header: React.FC<HeaderProps> = ({ content, onPrint, isPrinting }) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<{ page: number; text: string }[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -120,6 +122,18 @@ const Header: React.FC<HeaderProps> = ({ content }) => {
             </div>
           )}
         </div>
+
+        <button
+          onClick={onPrint}
+          disabled={isPrinting}
+          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-bold transition-all shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed text-sm whitespace-nowrap ml-2"
+          title="Esporta il manuale con Smart Print"
+        >
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+          <span>{isPrinting ? "Generando..." : "PDF Smart"}</span>
+        </button>
       </div>
     </header>
   );
